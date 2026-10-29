@@ -9,7 +9,7 @@ from flask import Flask, abort, render_template
 from dotenv import load_dotenv
 
 load_dotenv()
-app = Flask(__name__)
+app = Flask(__name__, static_folder="public", static_url_path="")
 
 STORY_POINTS = [
     {"index": 0, "title": "Reliability & Championships", "detail": "Season completion, podiums, constructor progress and headline KPIs."},
@@ -98,3 +98,4 @@ def healthz():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=int(os.environ.get("PORT", "5000")), debug=os.environ.get("FLASK_DEBUG") == "1")
+
