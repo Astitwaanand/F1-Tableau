@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ view.title }} | F1 Race Intelligence{% endblock %}
+{% block breadcrumb %}{{ view.eyebrow }}{% endblock %}
+{% block content %}
+<section class="view-heading">
+  <div>
+    <div class="eyebrow"><span class="eyebrow-line"></span>{{ view.eyebrow }}</div>
+    <h1>{{ view.title }}</h1>
+    <p>{{ view.description }}</p>
+  </div>
+  {% if view.external_url and embed_url %}
+  <a class="button button-outline" href="{{ view.external_url }}" target="_blank" rel="noopener noreferrer">Open on Tableau Public <span>↗</span></a>
+  {% endif %}
+</section>
+
+{% if view_key == 'story' %}
+<section class="story-navigator" aria-label="Story point navigation">
+  <div class="story-nav-head"><span>STORY POINTS</span><small id="story-progress">Choose a point</small></div>
+  <div class="story-point-list">
+    {% for point in story_points %}
+    <button class="story-point-button {% if loop.first %}is-current{% endif %}" type="button" data-story-index="{{ point.index }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">
+      <span class="point-index">{{ '%02d'|format(point.index + 1) }}</span>
+      <span class="point-copy"><strong>{{ point.title }}</strong><small>{{ point.detail }}</small></span>
+      <span class="point-chevron">→</span>
+    </button>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="viz-panel {% if view_key == 'story' %}viz-panel-story{% endif %}">
+  <div class="viz-toolbar">
+    <div class="viz-live"><span class="live-dot"></span><span>LIVE INTERACTIVE VIEW</span></div>
+    <span class="viz-hint">Use Tableau controls to filter and explore</span>
+  </div>
+  {% if embed_url %}
+  <div class="tableau-frame {% if view_key == 'story' %}tableau-frame-story{% endif %}">
+    <tableau-viz id="race-viz" src="{{ embed_url }}" toolbar="bottom" hide-tabs width="100%" height="{{ '760px' if view_key == 'story' else '780px' }}"></tableau-viz>
+  </div>
+  {% else %}
+  <div class="embed-placeholder">
+    <div class="placeholder-icon">F1</div>
+    <div class="eyebrow">TABLEAU PUBLIC LINK REQUIRED</div>
+    <h2>Connect the published view</h2>
+    <p>Add the Tableau Public “Copy Link” URL for this view to the matching environment variable. See the <a href="{{ url_for('static', filename='README-setup.txt') }}">setup instructions</a>.</p>
+    <code>{{ 'TABLEAU_STORY_URL' if view_key == 'story' else ('TABLEAU_STRATEGY_URL' if view_key == 'strategy' else 'TABLEAU_RELIABILITY_URL') }}</code>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

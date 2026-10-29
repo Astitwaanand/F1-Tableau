@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}F1 Race Intelligence | Overview{% endblock %}
+{% block breadcrumb %}OVERVIEW{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="eyebrow-line"></span>FORMULA 1 · RACE INTELLIGENCE</div>
+    <h1>Read the race<br><em>behind the numbers.</em></h1>
+    <p class="hero-lede">Explore driver performance, team trajectories, tyre strategy and reliability through interactive Tableau dashboards and a six-point story.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="{{ url_for('dashboard', view_key='strategy') }}">Open dashboards <span>→</span></a>
+      <a class="button button-quiet" href="{{ url_for('story') }}">View the story <span>↗</span></a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="track-ring ring-one"></div><div class="track-ring ring-two"></div>
+    <div class="track-center"><span>F1</span><small>RACE<br>INTEL</small></div>
+    <div class="art-coordinate coord-a">01 / STRATEGY</div><div class="art-coordinate coord-b">17 SEASONS</div>
+    <div class="art-spark spark-a"></div><div class="art-spark spark-b"></div>
+  </div>
+</section>
+
+<section class="section-heading">
+  <div><div class="eyebrow"><span class="eyebrow-line"></span>EXPLORE THE ANALYSIS</div><h2>Two dashboards. One race story.</h2></div>
+  <p>Choose a lens to explore the published interactive views.</p>
+</section>
+
+<section class="dashboard-grid">
+  <a class="dashboard-card card-strategy" href="{{ url_for('dashboard', view_key='strategy') }}">
+    <div class="card-top"><span class="card-number">01</span><span class="card-arrow">↗</span></div>
+    <div class="mini-viz mini-bars"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="card-meta">DASHBOARD</div><h3>Strategy &amp; Talent</h3>
+    <p>Circuit footprint, tyre choices, team DNF patterns and driver points.</p>
+    <span class="card-cta">Explore dashboard <b>→</b></span>
+  </a>
+  <a class="dashboard-card card-reliability" href="{{ url_for('dashboard', view_key='reliability') }}">
+    <div class="card-top"><span class="card-number">02</span><span class="card-arrow">↗</span></div>
+    <div class="mini-viz mini-line"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="card-meta">DASHBOARD</div><h3>Reliability &amp; Championships</h3>
+    <p>Season completion trends, podium achievements, constructor points and KPIs.</p>
+    <span class="card-cta">Explore dashboard <b>→</b></span>
+  </a>
+  <a class="dashboard-card card-story" href="{{ url_for('story') }}">
+    <div class="card-top"><span class="card-number">06</span><span class="card-arrow">↗</span></div>
+    <div class="story-chips"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span></div>
+    <div class="card-meta">TABLEAU STORY</div><h3>Race Intelligence Story</h3>
+    <p>Move through six story points, from championship reliability to driver performance.</p>
+    <span class="card-cta">Follow the story <b>→</b></span>
+  </a>
+</section>
+
+<section class="intro-band">
+  <div class="intro-mark">01—03</div>
+  <div><div class="eyebrow">BUILT FOR RACE-DAY QUESTIONS</div><h2>From the pit wall to the press box.</h2></div>
+  <p>Team strategists can compare championship pace and tyre choices. Journalists can pull driver, podium and host-country views. Reliability analysts can scan DNF patterns across seasons and teams.</p>
+</section>
+{% endblock %}
